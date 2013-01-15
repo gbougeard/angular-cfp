@@ -9,13 +9,15 @@ MyCtrl1.$inject = [];
 
 
 myApp.controller('WizStep1Controller',
-    function ($scope, $location) {
+    function ($scope, $location, wizardSvc) {
+        $scope.conferences = wizardSvc.getConferences();
 
         $scope.next = function () {
             $location.path('/wizard/step2');
         };
 
     });
+
 myApp.controller('WizStep2Controller',
     function ($scope, $location) {
 
@@ -27,6 +29,7 @@ myApp.controller('WizStep2Controller',
         };
 
     });
+
 myApp.controller('WizStep3Controller',
     function ($scope, $location) {
 
@@ -38,6 +41,7 @@ myApp.controller('WizStep3Controller',
         };
 
     });
+
 myApp.controller('WizStep4Controller',
     function ($scope, $location) {
 
