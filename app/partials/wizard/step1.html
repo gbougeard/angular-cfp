@@ -1,0 +1,15 @@
+<form class="form-horizontal" name="formStep1">
+    <fieldset>
+        <div id="legend">
+            <legend class="">Step 1</legend>
+        </div>
+
+        <br>
+
+        <div class="form-actions">
+            <a href="#/" class="btn btn-danger">Cancel</a>
+            <button class="btn btn-primary" ng-click="next()" ng-disabled="isClean() || formStep1.$invalid">Next
+            </button>
+        </div>
+    </fieldset>
+</form>
