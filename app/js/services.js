@@ -6,10 +6,36 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', []).
-    service('wizardSvc', function ($rootScope) {
+    service('wizardSvc', function ($rootScope, localStorage) {
+
+        var LOCAL_STORAGE_CONFERENCE = 'fmConference',
+            conferenceString = localStorage[LOCAL_STORAGE_CONFERENCE];
+        var LOCAL_STORAGE_TYPE = 'fmType',
+            typeString = localStorage[LOCAL_STORAGE_TYPE];
+        var LOCAL_STORAGE_TYPES = 'fmTypes',
+            typesString = localStorage[LOCAL_STORAGE_TYPES];
+
         // Data to persist
-        var conference = {};
-        var type = {};
+        var conference = conferenceString ? JSON.parse(conferenceString) : {};
+        var type = typeString ? JSON.parse(typeString) : {};
+        var types = typesString ? JSON.parse(typesString) : [];
+
+        // Watch on data and persist to local storage
+        $rootScope.$watch(function () {
+            return conference;
+        }, function () {
+            localStorage[LOCAL_STORAGE_CONFERENCE] = JSON.stringify(conference);
+        }, true);
+        $rootScope.$watch(function () {
+            return type;
+        }, function () {
+            localStorage[LOCAL_STORAGE_TYPE] = JSON.stringify(type);
+        }, true);
+        $rootScope.$watch(function () {
+            return types;
+        }, function () {
+            localStorage[LOCAL_STORAGE_TYPES] = JSON.stringify(types);
+        }, true);
 
         // Datas - hard coded
         var conferences = [
@@ -28,7 +54,6 @@ angular.module('myApp.services', []).
             ]}
         ];
 
-        var types = [];
 
         return {
             // DATA services
