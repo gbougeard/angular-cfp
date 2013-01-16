@@ -1,11 +1,28 @@
 <form class="form-horizontal" name="formStep1">
     <fieldset>
         <div id="legend">
-            <legend class="">Step 1</legend>
+            <legend class="">Step 1 - Select a conference</legend>
         </div>
+        <div class="control-group" ng-class="{error: formStep1.conf.$invalid}">
+            <label for="conf">Name</label>
+            <select id="conf" ui-select2 ng-model="conference" data-placeholder="-- Select One --" ng-change="getTypes()" style="width:200px" required>
+                <option></option>
+                <option ng-repeat="item in conferences" value="{{item.id}}">{{item.text}}</option>
+            </select>
+            <span ng-show="formStep1.name.$error.required" class="help-inline"> Required</span>
+        </div>
+        <div class="control-group" ng-class="{error: formStep1.type.$invalid}">
+            <label for="conf">Session type</label>
 
+            <select id="type" ui-select2 ng-model="type" data-placeholder="-- Select One --" style="width:200px" required>
+                <option></option>
+                <option ng-repeat="item in conftypes" value="{{item.id}}">{{item.text}}</option>
+            </select>
+            <span ng-show="formStep1.type.$error.required" class="help-inline"> Required</span>
+        </div>
         <br>
-        <pre>{{conferences |json}}</pre>
+        <pre>Conference: {{conference |json}}</pre>
+        <pre>Type: {{type |json}}</pre>
 
         <div class="form-actions">
             <a href="#/" class="btn btn-danger">Cancel</a>
