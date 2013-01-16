@@ -11,13 +11,15 @@ MyCtrl1.$inject = [];
 myApp.controller('WizStep1Controller',
     function ($scope, $location, wizardSvc) {
         $scope.conferences = wizardSvc.getConferences();
-        $scope.conftypes = [];
+        $scope.conftypes = wizardSvc.getTypes();
 
-        $scope.conference = {};
-        $scope.type = {};
+        $scope.conference = wizardSvc.getConference();
+        $scope.type = wizardSvc.getType();
 
         $scope.getTypes = function () {
+            console.log("getTypes", $scope.conference);
             angular.forEach($scope.conferences, function (item, key) {
+                console.log(item, key);
                 if (item.id === $scope.conference) {
                     $scope.conftypes = item.conftypes;
                 }
@@ -25,6 +27,11 @@ myApp.controller('WizStep1Controller',
         };
 
         $scope.next = function () {
+            console.log("conf",$scope.conference);
+            console.log("type",$scope.type);
+            wizardSvc.setConference($scope.conference);
+            wizardSvc.setType($scope.type);
+            wizardSvc.setTypes($scope.conftypes);
             $location.path('/wizard/step2');
         };
 

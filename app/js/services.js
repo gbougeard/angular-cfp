@@ -7,7 +7,11 @@
 // In this case it is a simple value service.
 angular.module('myApp.services', []).
     service('wizardSvc', function ($rootScope) {
+        // Data to persist
+        var conference = {};
+        var type = {};
 
+        // Datas - hard coded
         var conferences = [
             {id: 'uk2013', text: 'Devoxx UK 2013', conftypes: [
                 {id: 'conf', text: 'Conference'},
@@ -24,9 +28,26 @@ angular.module('myApp.services', []).
             ]}
         ];
 
+        var types = [];
+
         return {
+            // DATA services
             getConferences: function () {
                 return conferences;
+            }
+            // GETTERS & SETTERS
+            , getConference: function () {
+                return conference;
+            }, setConference: function (conf) {
+                conference = conf;
+            }, getType: function () {
+                return type;
+            }, setType: function (t) {
+                type = t;
+            }, getTypes: function () {
+                return types;
+            }, setTypes: function (t) {
+                types = t;
             }
         }
 
