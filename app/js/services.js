@@ -6,7 +6,7 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', []).
-    service('wizardSvc', function ($rootScope, localStorage) {
+    service('wizardSvc', function ($rootScope, $http, localStorage) {
 
         var LOCAL_STORAGE_CONFERENCE = 'fmConference',
             conferenceString = localStorage[LOCAL_STORAGE_CONFERENCE];
@@ -53,11 +53,26 @@ angular.module('myApp.services', []).
                 {id: 'uni', text: 'University'}
             ]}
         ];
+        // Datas loaded from network
+        function loadConferences (){
+            $http({method: 'GET', url: '/someUrl'}).
+                success(function(data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    conferences = data;
+                }).
+                error(function(data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.error("Cannot load data", status);
+                });
+        }
 
 
         return {
             // DATA services
             getConferences: function () {
+                //loadConferences();
                 return conferences;
             }
             // GETTERS & SETTERS
