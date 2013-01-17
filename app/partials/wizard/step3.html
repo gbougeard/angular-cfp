@@ -1,10 +1,19 @@
 <form class="form-horizontal" name="formStep3">
     <fieldset>
         <div id="legend">
-            <legend class="">Step 3</legend>
+            <legend class="">Step 3 - Speaker</legend>
         </div>
-
-        <br>
+        <div class="control-group" ng-class="{error: formStep3.author.$invalid}">
+            <label for="author">Author</label>
+            <input type="text" class="input-large" id="author" name="author" ng-model="proposal.author" required>
+            <span ng-show="formStep3.author.$error.required" class="help-inline"> Required</span>
+        </div>
+        <div class="control-group" ng-class="{error: formStep3.bio.$invalid}">
+            <label for="bio">Bio</label>
+            <textarea ui-tinymce ng-model="proposal.bio" id="bio" style="width: 100%;"></textarea>
+            <span ng-show="formStep3.bio.$error.required" class="help-inline"> Required</span>
+        </div>
+        <br/>
 
         <div class="form-actions">
             <button class="btn btn-danger" ng-click="back()">Back</button>
