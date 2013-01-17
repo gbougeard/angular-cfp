@@ -1,5 +1,6 @@
 import org.vertx.java.deploy.Verticle;
 import org.vertx.java.core.json.JsonObject;
+import org.vertx.java.core.json.JsonArray;
 import org.vertx.mods.WebServer;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.http.HttpServerRequest;
@@ -11,9 +12,33 @@ public class Server extends WebServer {
 
   public void start() {
 
-    matcher.get("/dogs", new Handler<HttpServerRequest>() {
+    matcher.get("/conferences", new Handler<HttpServerRequest>() {
       public void handle(HttpServerRequest req) {
-        req.response.end("You requested dogs");
+      	JsonArray data = new JsonArray();
+      	data.
+      	addObject(new JsonObject().
+      	  putString("id", "uk2013").
+      	  putString("text", "Devoxx UK 2013").
+      	  putArray("conftypes", new JsonArray().
+      	  	add(new JsonObject().putString("id", "conf").putString("text", "Conference")).
+      	  	add(new JsonObject().putString("id", "bof").putString("text", "BOF")).
+      	  	add(new JsonObject().putString("id", "quickie").putString("text", "Quickie"))
+      	  )
+      	).
+      	addObject(new JsonObject().
+      	  putString("id", "fr2013").
+      	  putString("text", "Devoxx FR 2013").
+      	  putArray("conftypes", new JsonArray().
+      	  	add(new JsonObject().putString("id", "conf").putString("text", "Conference")).
+      	  	add(new JsonObject().putString("id", "bof").putString("text", "BOF")).
+      	  	add(new JsonObject().putString("id", "quickie").putString("text", "Quickie")).
+      	  	add(new JsonObject().putString("id", "handson").putString("text", "Hands-on Labs")).
+      	  	add(new JsonObject().putString("id", "tools").putString("text", "Tools in action")).
+      	  	add(new JsonObject().putString("id", "uni").putString("text", "University"))
+      	  )
+      	);
+      	req.response.headers().put("Content-Type", "application/json; charset=UTF-8");
+        req.response.end(data.encode());
       }
     });
 
