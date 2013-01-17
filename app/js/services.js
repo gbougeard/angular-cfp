@@ -55,7 +55,7 @@ angular.module('myApp.services', []).
         ];
         // Datas loaded from network
         function loadConferences (){
-            $http({method: 'GET', url: '/someUrl'}).
+            $http({method: 'GET', url: '/conferences'}).
                 success(function(data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
@@ -72,7 +72,7 @@ angular.module('myApp.services', []).
         return {
             // DATA services
             getConferences: function () {
-                //loadConferences();
+                loadConferences();
                 return conferences;
             }
             // GETTERS & SETTERS
