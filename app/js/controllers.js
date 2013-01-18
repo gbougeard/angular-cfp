@@ -38,21 +38,25 @@ myApp.controller('WizStep1Controller',
     });
 
 myApp.controller('WizStep2Controller',
-    function ($scope, $location) {
+    function ($scope, $location, wizardSvc) {
+        $scope.proposal = wizardSvc.getProposal();
 
         $scope.back = function () {
             $location.path('/wizard/step1');
         };
         $scope.next = function () {
+            wizardSvc.setProposal($scope.proposal);
             $location.path('/wizard/step3');
         };
 
     });
 
 myApp.controller('WizStep3Controller',
-    function ($scope, $location) {
+    function ($scope, $location, wizardSvc) {
+        $scope.proposal = wizardSvc.getProposal();
 
         $scope.next = function () {
+            wizardSvc.setProposal($scope.proposal);
             $location.path('/wizard/step4');
         };
         $scope.back = function () {
@@ -62,7 +66,8 @@ myApp.controller('WizStep3Controller',
     });
 
 myApp.controller('WizStep4Controller',
-    function ($scope, $location) {
+    function ($scope, $location, wizardSvc) {
+        $scope.proposal = wizardSvc.getProposal();
 
         $scope.back = function () {
             $location.path('/wizard/step3');

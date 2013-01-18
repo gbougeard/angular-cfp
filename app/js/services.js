@@ -14,11 +14,14 @@ angular.module('myApp.services', []).
             typeString = localStorage[LOCAL_STORAGE_TYPE];
         var LOCAL_STORAGE_TYPES = 'fmTypes',
             typesString = localStorage[LOCAL_STORAGE_TYPES];
+        var LOCAL_STORAGE_PROPOSAL = 'fmProposal',
+            proposalString = localStorage[LOCAL_STORAGE_PROPOSAL];
 
         // Data to persist
         var conference = conferenceString ? JSON.parse(conferenceString) : {};
         var type = typeString ? JSON.parse(typeString) : {};
         var types = typesString ? JSON.parse(typesString) : [];
+        var proposal = proposalString ? JSON.parse(proposalString) : {};
 
         // Watch on data and persist to local storage
         $rootScope.$watch(function () {
@@ -35,6 +38,11 @@ angular.module('myApp.services', []).
             return types;
         }, function () {
             localStorage[LOCAL_STORAGE_TYPES] = JSON.stringify(types);
+        }, true);
+        $rootScope.$watch(function () {
+            return proposal;
+        }, function () {
+            localStorage[LOCAL_STORAGE_PROPOSAL] = JSON.stringify(proposal);
         }, true);
 
         // Datas - hard coded
@@ -88,6 +96,10 @@ angular.module('myApp.services', []).
                 return types;
             }, setTypes: function (t) {
                 types = t;
+            }, getProposal: function () {
+                return proposal;
+            }, setProposal: function (t) {
+                proposal = t;
             }
         }
 
