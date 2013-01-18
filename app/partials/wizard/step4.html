@@ -7,11 +7,11 @@
             <dt>Title</dt>
             <dd>{{proposal.title}}</dd>
             <dt>Summary</dt>
-            <dd>{{proposal.text}}</dd>
+            <dd><span ng-bind-html-unsafe="proposal.text"></span></dd>
             <dt>Author</dt>
             <dd>{{proposal.author}}</dd>
             <dt>Bio</dt>
-            <dd>{{proposal.bio}}</dd>
+            <dd><span ng-bind-html-unsafe="proposal.bio"></span></dd>
         </dl>
         <br>
 
