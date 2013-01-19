@@ -5,7 +5,7 @@
         </div>
         <div class="control-group" ng-class="{error: formStep1.conf.$invalid}">
             <label for="conf">Name</label>
-            <select id="conf" ui-select2 ng-model="conference" data-placeholder="-- Select One --" ng-change="getTypes()" style="width:200px" required>
+            <select id="conf" ui-select2 ng-model="proposal.conference" data-placeholder="-- Select One --" ng-change="getTypes()" style="width:200px" required>
                 <option></option>
                 <option ng-repeat="item in conferences" value="{{item.id}}">{{item.text}}</option>
             </select>
@@ -14,15 +14,14 @@
         <div class="control-group" ng-class="{error: formStep1.type.$invalid}">
             <label for="conf">Session type</label>
 
-            <select id="type" ui-select2 ng-model="type" data-placeholder="-- Select One --" style="width:200px" required>
+            <select id="type" ui-select2 ng-model="proposal.type" data-placeholder="-- Select One --" style="width:200px" required>
                 <option></option>
                 <option ng-repeat="item in conftypes" value="{{item.id}}">{{item.text}}</option>
             </select>
             <span ng-show="formStep1.type.$error.required" class="help-inline"> Required</span>
         </div>
         <br>
-        <pre>Conference: {{conference |json}}</pre>
-        <pre>Type: {{type |json}}</pre>
+        <pre>Proposal: {{proposal|json}}</pre>
 
         <div class="form-actions">
             <a href="#/" class="btn btn-danger">Cancel</a>

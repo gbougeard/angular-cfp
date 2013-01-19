@@ -42,6 +42,24 @@ public class Server extends WebServer {
       }
     });
 
+      matcher.get("/proposals", new Handler<HttpServerRequest>() {
+      public void handle(HttpServerRequest req) {
+      	JsonArray data = new JsonArray();
+      	data.
+      	addObject(new JsonObject().
+      	  putString("dtCreat", "20130101").
+      	  putString("conf", "fr2013").
+      	  putString("type", "tools").
+      	  putString("title", "Crash in action").
+      	  putString("summary", "<i>Crash rocks!</i>").
+      	  putString("author", "Julien Viet").
+      	  putString("bio", "<i>Mars Jug Leader</i>")
+      	);
+      	req.response.headers().put("Content-Type", "application/json; charset=UTF-8");
+        req.response.end(data.encode());
+      }
+    });
+
     matcher.noMatch(new Handler<HttpServerRequest>() {
       public void handle(HttpServerRequest req) {
         Server.super.handle(req);

@@ -61,6 +61,7 @@ angular.module('myApp.services', []).
                 {id: 'uni', text: 'University'}
             ]}
         ];
+        var proposals = [];
         // Datas loaded from network
         function loadConferences (){
             $http({method: 'GET', url: '/conferences'}).
@@ -75,6 +76,19 @@ angular.module('myApp.services', []).
                     console.error("Cannot load data", status);
                 });
         }
+        function loadProposals(){
+            $http({method: 'GET', url: '/proposals'}).
+                success(function(data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    proposals = data;
+                }).
+                error(function(data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.error("Cannot load data", status);
+                });
+        }
 
 
         return {
@@ -82,6 +96,10 @@ angular.module('myApp.services', []).
             getConferences: function () {
                 loadConferences();
                 return conferences;
+            }
+            ,getProposals: function () {
+                loadProposals();
+                return proposals;
             }
             // GETTERS & SETTERS
             , getConference: function () {

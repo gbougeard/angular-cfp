@@ -2,35 +2,33 @@
 
 /* Controllers */
 
+myApp.controller('MyCtrl1',
+    function ($scope, $location, wizardSvc) {
+        $scope.proposals = wizardSvc.getProposals();
+    });
 
-function MyCtrl1() {
-}
-MyCtrl1.$inject = [];
-
+myApp.controller('MyCtrl2',
+    function ($scope, $location, wizardSvc) {
+        $scope.proposals = wizardSvc.getProposals();
+    });
 
 myApp.controller('WizStep1Controller',
     function ($scope, $location, wizardSvc) {
         $scope.conferences = wizardSvc.getConferences();
         $scope.conftypes = wizardSvc.getTypes();
 
-        $scope.conference = wizardSvc.getConference();
-        $scope.type = wizardSvc.getType();
+        $scope.proposal = wizardSvc.getProposal();
 
         $scope.getTypes = function () {
-            console.log("getTypes", $scope.conference);
             angular.forEach($scope.conferences, function (item, key) {
-                console.log(item, key);
-                if (item.id === $scope.conference) {
+                if (item.id === $scope.proposal.conference) {
                     $scope.conftypes = item.conftypes;
                 }
             });
         };
 
         $scope.next = function () {
-            console.log("conf",$scope.conference);
-            console.log("type",$scope.type);
-            wizardSvc.setConference($scope.conference);
-            wizardSvc.setType($scope.type);
+            wizardSvc.setProposal($scope.proposal);
             wizardSvc.setTypes($scope.conftypes);
             $location.path('/wizard/step2');
         };
